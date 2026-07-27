@@ -1,0 +1,82 @@
+-- check for nulls or duplicates in primary key
+--expetetations: no results
+
+
+
+-- checking duplicate primary keys
+SELECT 'bronze.admission' AS table_name, 
+admission_id AS key_value, COUNT(*) AS dup_count
+FROM bronze.admission GROUP BY admission_id HAVING COUNT(*) > 1;
+
+
+--bed
+SELECT 'bronze.bed', bed_id, COUNT(*)
+FROM bronze.bed GROUP BY bed_id HAVING COUNT(*) > 1;
+
+
+--billing
+SELECT 'bronze.billing', bill_id, COUNT(*)
+FROM bronze.billing GROUP BY bill_id HAVING COUNT(*) > 1;
+
+--4. billing_detail
+SELECT 'bronze.billing_detail', billing_detail_id, COUNT(*)
+FROM bronze.billing_detail GROUP BY billing_detail_id HAVING COUNT(*) > 1;
+
+-- 5. department
+SELECT 'bronze.department', department_id, COUNT(*)
+FROM bronze.department GROUP BY department_id HAVING COUNT(*) > 1;
+
+
+-- 7. disease
+SELECT 'bronze.disease', disease_id, COUNT(*)
+FROM bronze.disease GROUP BY disease_id HAVING COUNT(*) > 1;
+ 
+ --. doctor
+SELECT 'bronze.doctor', doctor_id, COUNT(*)
+FROM bronze.doctor GROUP BY doctor_id HAVING COUNT(*) > 1;
+
+--9. drug
+SELECT 'bronze.drug', drug_id, COUNT(*)
+FROM bronze.drug GROUP BY drug_id HAVING COUNT(*) > 1;
+
+-- 11. drug_manufacturer
+SELECT 'bronze.drug_manufacturer', manufacturer_id, COUNT(*)
+FROM bronze.drug_manufacturer GROUP BY manufacturer_id HAVING COUNT(*) > 1;
+
+
+-- 12. employee
+SELECT 'bronze.employee', employee_id, COUNT(*)
+FROM bronze.employee GROUP BY employee_id HAVING COUNT(*) > 1;
+
+-- 13. insurance_provider
+SELECT 'bronze.insurance_provider', insurance_provider_id, COUNT(*)
+FROM bronze.insurance_provider GROUP BY insurance_provider_id HAVING COUNT(*) > 1;
+ 
+
+ -- 14. patient
+SELECT 'bronze.patient', patient_id, COUNT(*)
+FROM bronze.patient GROUP BY patient_id HAVING COUNT(*) > 1;
+
+-- 15. patient_diagnostic
+SELECT 'bronze.patient_diagnostic', patient_diagnostic_id, COUNT(*)
+FROM bronze.patient_diagnostic GROUP BY patient_diagnostic_id HAVING COUNT(*) > 1;
+
+--16. patient_insurance
+SELECT 'bronze.patient_insurance', patient_insurance_id, COUNT(*)
+FROM bronze.patient_insurance GROUP BY patient_insurance_id HAVING COUNT(*) > 1;
+
+
+-- 17. prescription
+SELECT 'bronze.prescription', prescription_id, COUNT(*)
+FROM bronze.prescription GROUP BY prescription_id HAVING COUNT(*) > 1;
+ 
+
+ -- 18. staff_assignment
+SELECT 'bronze.staff_assignment', assignment_id, COUNT(*)
+FROM bronze.staff_assignment GROUP BY assignment_id HAVING COUNT(*) > 1;
+
+
+-- 19. ward
+SELECT 'bronze.ward', ward_id, COUNT(*)
+FROM bronze.ward GROUP BY ward_id HAVING COUNT(*) > 1
+
