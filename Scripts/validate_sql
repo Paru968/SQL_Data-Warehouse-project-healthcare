@@ -1,0 +1,72 @@
+/*
+===============================================================================
+                GOLD LAYER - VALIDATION & TESTING QUERIES
+===============================================================================
+
+Project : Healthcare Data Warehouse
+Layer   : Gold
+Purpose : Validate Fact Tables and Dimension Relationships
+
+Author  : Your Name
+
+===============================================================================
+*/
+
+--------------------------------------------------------------------------------
+-- Validate Fact Admission with Date Dimension
+--------------------------------------------------------------------------------
+
+SELECT
+    fa.admission_id,
+    dd.date_sk,
+    fa.admission_date,
+    fa.discharge_date,
+    fa.patient_sk,
+    fa.department_sk,
+    fa.disease_sk,
+    fa.ward_sk,
+    fa.bed_sk,
+    fa.admission_type,
+    fa.admission_status,
+    fa.length_of_stay,
+    fa.batch_id,
+    fa.load_datetime
+FROM gold.fact_admission fa
+INNER JOIN gold.dim_date dd
+    ON fa.admission_date = dd.full_date;
+
+
+--------------------------------------------------------------------------------
+-- Validate Prescription Relationships
+--------------------------------------------------------------------------------
+
+SELECT
+
+    ROW_NUMBER() OVER (ORDER BY p.prescription_id) AS prescription_sk,
+
+    p.prescription_id,
+
+    d.date_sk,
+    a.admission_date,
+
+    a.patient_id,
+
+    dr.drug_sk,
+
+    p.dosage,
+    p.frequency,
+    p.duration_days,
+
+    p.batch_id,
+    p.load_datetime
+
+FROM silver.prescription p
+
+INNER JOIN silver.admission a
+    ON p.admission_id = a.admission_id
+
+INNER JOIN gold.dim_date d
+    ON a.admission_date = d.full_date
+
+INNER JOIN gold.dim_drug dr
+    ON p.drug_id = dr.drug_id;
